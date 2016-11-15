@@ -12,6 +12,8 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+/*    	$videoFactory = $this->get('video.factory');
+    	$videoFactory->CreateVideo('Test', new \DateTime("2016-09-23 06:12:33"), 'bidule');*/
         return $this->render('AppBundle:Default:index.html.twig');
     }
 }

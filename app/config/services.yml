@@ -3,7 +3,11 @@
 parameters:
 #    parameter_name: value
 
-services:
+#services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+services:
+    video.factory:
+        class: VideoBundle\Factory\VideoFactory
+        arguments: [ "@doctrine.orm.entity_manager" ]

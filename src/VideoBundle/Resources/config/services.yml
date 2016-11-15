@@ -1,0 +1,4 @@
+services:
+    video.factory:
+        class: VideoBundle\Factory\VideoFactory
+        arguments: [ @doctrine.orm.entity_manager ,'@service_container' ] 

@@ -41,14 +41,18 @@ class VideoController extends Controller
         }
 
         if ($from != "" && $to != "") {
-        	$qb->where('v.date BETWEEN :from AND :to')
+        	$qb->andwhere('v.date BETWEEN :from AND :to')
         	->setParameter('from', $from)
             ->setParameter('to', $to);
         }
 
         $videos = $qb->getQuery()->getResult();
-        $json = json_decode($videos);
-		return json_encode($json, JSON_PRETTY_PRINT);
+
+        if (empty($videos)) {
+            return new JsonResponse(['message' => 'Nothing found !'], Response::HTTP_NOT_FOUND);
+        }
+
+        return $videos;
     }
 
     /**
@@ -62,10 +66,9 @@ class VideoController extends Controller
                 ->getRepository('VideoBundle:Video')
                 ->find($id);
 
-    /*  $view = View::create($videos);
-        $view->setFormat('json');
-
-        return $view;*/
+        if (empty($video)) {
+            return new JsonResponse(['message' => 'Video not found'], Response::HTTP_NOT_FOUND);
+        }
         return $video;
     }
 }
