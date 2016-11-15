@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace VideoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Video
  *
  * @ORM\Table(name="video")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\VideoRepository")
+ * @ORM\Entity(repositoryClass="VideoBundle\Repository\VideoRepository")
  */
 class Video
 {
