@@ -1,5 +1,7 @@
-kaemo_api
-=========
+Video Api :vhs:
+============
 
-A Symfony project created on November 15, 2016, 7:32 am.
-# video-api
+Projet de test, voir [http://kaemo-test.ddns.net/](http://kaemo-test.ddns.net/)
+
+**// TODO**
+Ajouter des tests unitaires pour les ajouts de videos via la console 
