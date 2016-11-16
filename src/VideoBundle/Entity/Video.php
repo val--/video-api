@@ -3,6 +3,7 @@
 namespace VideoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * Video
@@ -32,6 +33,7 @@ class Video
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Type("DateTime<'Y-m-d H:i:s'>")
      */
     private $date;
 
