@@ -70,6 +70,7 @@ class VideoController extends Controller
         if (empty($video)) {
             return new JsonResponse(['message' => 'Video not found'], Response::HTTP_NOT_FOUND);
         }
-        return $video;
+        $video_json = array('Video' => $video);
+        return $video_json;
     }
 }
