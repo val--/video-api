@@ -13,25 +13,24 @@ class VideoRepository extends EntityRepository
 	public function countVideos($paramFetcher){
 
 		$qb = $this->createQueryBuilder('v');
-        $qb->select('v');
-        $qb->select('count(v.id)');
-        $qb = $this->withParams($qb, $paramFetcher);
-        $qb->setMaxResults(1);
-        return $qb->getQuery()->getOneOrNullResult();
+		$qb->select('v');
+		$qb->select('count(v.id)');
+		$qb = $this->withParams($qb, $paramFetcher);
+		$qb->setMaxResults(1);
+
+		return $qb->getQuery()->getOneOrNullResult();
 	}
 
 	public function getVideos($paramFetcher){
 
 		$realisator = $paramFetcher->get('realisator');
-    	$from = $paramFetcher->get('from');
-    	$to = $paramFetcher->get('to');
+		$from = $paramFetcher->get('from');
+		$to = $paramFetcher->get('to');
+		$qb = $this->createQueryBuilder('v');
+		$qb->select('v');
+		$qb = $this->withParams($qb, $paramFetcher);
 
-        $qb = $this->createQueryBuilder('v');
-        $qb->select('v');
-
- 		$qb = $this->withParams($qb, $paramFetcher);
-
-        return $qb->getQuery()->getResult();
+		return $qb->getQuery()->getResult();
 	}
 
 	// Paramètres réutilisables
@@ -39,21 +38,21 @@ class VideoRepository extends EntityRepository
     {
 
 		$realisator = $paramFetcher->get('realisator');
-    	$from = $paramFetcher->get('from');
-    	$to = $paramFetcher->get('to');
+		$from = $paramFetcher->get('from');
+		$to = $paramFetcher->get('to');
 
-        if ($realisator != "") {
-            $qb->where('v.realisator LIKE :realisator')
-            ->setParameter('realisator', $realisator.'%');
-        }
+		if ($realisator != "") {
+			$qb->where('v.realisator LIKE :realisator')
+			->setParameter('realisator', $realisator.'%');
+		}
 
-        if ($from != "" && $to != "") {
-        	$qb->andwhere('v.date BETWEEN :from AND :to')
-        	->setParameter('from', $from)
-            ->setParameter('to', $to);
-        }
+		if ($from != "" && $to != "") {
+			$qb->andwhere('v.date BETWEEN :from AND :to')
+			->setParameter('from', $from)
+			->setParameter('to', $to);
+		}
 
-      return $qb;
+		return $qb;
     }
 
 
