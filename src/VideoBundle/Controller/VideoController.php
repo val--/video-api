@@ -38,6 +38,7 @@ class VideoController extends Controller
 
 
         $qb = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
+
         $qb->select('v')
            ->from('VideoBundle:Video', 'v');
 
@@ -52,11 +53,15 @@ class VideoController extends Controller
             ->setParameter('to', $to);
         }
 
-        $videos = $qb->getQuery()->getResult();
+        $qbcount = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
+        $count = $qbcount->select('count(v.id)')->from('VideoBundle:Video', 'v')->setMaxResults(1)->getQuery()->getOneOrNullResult();
+
+        $videos = array('Videos' => $qb->getQuery()->getResult(), 'Count' => $count[1]);
 
         if (empty($videos)) {
             return new JsonResponse(['message' => 'Nothing found !'], Response::HTTP_NOT_FOUND);
         }
+
 
         return $videos;
     }
