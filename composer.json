@@ -30,7 +30,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "friendsofsymfony/rest-bundle": "^2.1",
         "coresphere/console-bundle": "dev-master",
-        "jms/serializer-bundle": "^1.1"
+        "jms/serializer-bundle": "^1.1",
+        "eightpoints/guzzle-bundle": "^5.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
