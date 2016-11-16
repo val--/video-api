@@ -32,38 +32,17 @@ class VideoController extends Controller
      */
     public function getVideosAction(ParamFetcher $paramFetcher)
     {
-    	$realisator = $paramFetcher->get('realisator');
-    	$from = $paramFetcher->get('from');
-    	$to = $paramFetcher->get('to');
 
+        $videos = $this->getDoctrine()->getManager()->getRepository('VideoBundle:Video')->getVideos($paramFetcher);
+        $count = $this->getDoctrine()->getManager()->getRepository('VideoBundle:Video')->countVideos($paramFetcher); 
+       
+        $videos_json = array('Videos' => $videos, 'Count' => $count[1]);
 
-        $qb = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
-
-        $qb->select('v')
-           ->from('VideoBundle:Video', 'v');
-
-        if ($realisator != "") {
-            $qb->where('v.realisator LIKE :realisator')
-            ->setParameter('realisator', $realisator.'%');
-        }
-
-        if ($from != "" && $to != "") {
-        	$qb->andwhere('v.date BETWEEN :from AND :to')
-        	->setParameter('from', $from)
-            ->setParameter('to', $to);
-        }
-
-        $qbcount = $this->get('doctrine.orm.entity_manager')->createQueryBuilder();
-        $count = $qbcount->select('count(v.id)')->from('VideoBundle:Video', 'v')->setMaxResults(1)->getQuery()->getOneOrNullResult();
-
-        $videos = array('Videos' => $qb->getQuery()->getResult(), 'Count' => $count[1]);
-
-        if (empty($videos)) {
+        if (empty($videos_json)) {
             return new JsonResponse(['message' => 'Nothing found !'], Response::HTTP_NOT_FOUND);
         }
 
-
-        return $videos;
+        return $videos_json;
     }
 
     /**
