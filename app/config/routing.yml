@@ -5,3 +5,7 @@ app:
 videos:
     type:     rest
     resource: VideoBundle\Controller\VideoController
+
+coresphere_console:
+    resource: .
+    type: extra

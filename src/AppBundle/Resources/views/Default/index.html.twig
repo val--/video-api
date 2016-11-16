@@ -1,1 +1,46 @@
-Hello World!
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Kaemo API{% endblock %}</title>
+
+    {% block stylesheets %}
+      <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="{{ asset('css/theme.css')}}" rel="stylesheet">
+    {% endblock %}
+  </head>
+
+  <body>
+	  <div class="container">
+	  <div class="row">
+	  <h1>Kaemo Video API</h1>
+	  <div class="panel panel-default">
+	  <div class="panel-body">
+	    <p><strong>Pour afficher l'API, merci de cliquer <a href="videos" target="_blank">ici</a>.</strong></p>
+	    <p>Vous pouvez utiliser directement <strong>la console Symfony</strong> ci-dessous afin d'y ajouter des films. <br>
+	    Ex. <span class="label label-primary">video:add-video</span> 
+	    <span class="label label-default">Duel</span> 
+	    <span class="label label-default">"2009-08-07 06:02:13"</span> 
+	    <span class="label label-default">"Steven Spielberg"</span></p>
+	    La commande <span class="label label-primary">video:add-video</span> prend donc en argument <strong>le nom de la vidéo</strong>, <strong>la date d'ajout</strong> (au format datetime) ainsi que <strong>le nom du réalisateur</strong>.<br>
+	    <br><br><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>  Le code source est disponible <a href="" target="_blank">sur Github</a>.
+	     {{ render(controller('coresphere_console.controller:consoleAction')) }}
+	  </div>
+	</div>
+	<h1>Documentation Video API</h1>
+	 
+	  </div>
+	  </div>
+  </body>
+
+</html>
+
