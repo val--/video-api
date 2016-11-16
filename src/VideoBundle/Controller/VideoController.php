@@ -13,6 +13,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use VideoBundle\Entity\Video;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class VideoController extends Controller
 {
@@ -23,6 +24,10 @@ class VideoController extends Controller
      * @QueryParam(name="from", requirements="^\d{8}$", default="", description="A partir de quand afficher les éléments")
      * @QueryParam(name="to", requirements="^\d{8}$", default="", description="Limite d'éléments à afficher")
      * @QueryParam(name="realisator", default="", description="Nom du réalisateur")
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Returns all the videos."
+     * )
      */
     public function getVideosAction(ParamFetcher $paramFetcher)
     {
@@ -36,8 +41,8 @@ class VideoController extends Controller
            ->from('VideoBundle:Video', 'v');
 
         if ($realisator != "") {
-            $qb->where('v.realisator = :realisator')
-            ->setParameter('realisator', $realisator);
+            $qb->where('v.realisator LIKE :realisator')
+            ->setParameter('realisator', $realisator.'%');
         }
 
         if ($from != "" && $to != "") {
@@ -58,6 +63,17 @@ class VideoController extends Controller
     /**
      * @Rest\View()
      * @Rest\Get("/videos/{id}")
+     * @ApiDoc(
+     *  description="Returns a video.",
+     *  parameters={
+     *      {"name"="id", "dataType"="integer", "required"=true, "description"="video id"}
+     *  },
+     *  filters={
+     *      {"name"="from", "dataType"="datetime", "description"="Get the videos added from this date"},
+            {"name"="to", "dataType"="datetime", "description"="Get the videos added to this date (must be used with FROM parameter above). Ex. '?from=20150101&to=20151231' "},
+     *      {"name"="realisator", "dataType"="string", "description" = "All the videos from this realisator. Ex. '?realisator=David '"}
+     *  }
+     * )
      */
     public function getVideoAction($id)
     {
