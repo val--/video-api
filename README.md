@@ -39,7 +39,3 @@ Output :
 
 ![ScreenShot](https://raw.github.com/val--/video-api/master/screenshot.png)
 
-
-**// TODO**
-
-Ajouter des tests unitaires pour les ajouts de videos
